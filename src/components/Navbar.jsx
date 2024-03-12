@@ -34,7 +34,7 @@ function Navbar({loginStatus,setLoginStatus}) {
           </Link>
         }
         {   loginStatus &&
-          <Link to="/">
+          <Link to="/login">
             <button onClick={()=>{
                 setLoginStatus(false);
                 toast.success('Logged Out');

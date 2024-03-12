@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import Template from "../components/Template";
+import loginImage from "../assets/login.png";
 
-function Login() {
+function Login({setLoginStatus}) {
   return (
-    <div>
-        
-    </div>
-  )
+    <Template
+      title="Welcome Back"
+      desc1="Build skills for today, tomorrow and beyond !"
+      desc2="Education to future proof your career !"
+      image={loginImage}
+      formType="login"
+      setLoginStatus={setLoginStatus}
+    ></Template>
+  );
 }
 
-export default Login
+export default Login;

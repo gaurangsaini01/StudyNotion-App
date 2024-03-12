@@ -11,7 +11,7 @@ function Template({title,desc1,desc2,image,formType,setLoginStatus}) {
                 <span>{desc1}</span>
                 <span>{desc2}</span>
             </p>
-            {formType==='signup'?(<SignUpForm></SignUpForm>):(<LoginForm></LoginForm>)}
+            {formType==='signup'?(<SignUpForm setLoginStatus={setLoginStatus}></SignUpForm>):(<LoginForm setLoginStatus={setLoginStatus}></LoginForm>)}
             <div>
                 <div></div>
                 <p>OR</p>

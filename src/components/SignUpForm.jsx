@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-function SignUpForm() {
+import { useNavigate } from "react-router-dom";
+
+
+function SignUpForm({setLoginStatus}) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -9,13 +13,23 @@ function SignUpForm() {
     confirmPassword: "",
   });
   const [showPass, setShowPass] = useState(true);
-
+  const navigate = useNavigate();
   function changeHandler(event) {
     setFormData((prev) => {
       return { ...prev, [event.target.name]: event.target.value };
     });
   }
-
+  function submitHandler(e){
+    e.preventDefault();
+    if(formData.password!==formData.confirmPassword){
+        toast.error("Passwords Don't Match");
+    }
+    else{
+        setLoginStatus(true);
+        toast.success('Sign-up successfull , Welcome to dashboard')
+        navigate('/dashboard');
+    }
+  }
   return (
     <div>
       <div>
@@ -23,7 +37,7 @@ function SignUpForm() {
         <button>Instructor</button>
       </div>
 
-      <form>
+      <form onSubmit={submitHandler}>
         {/* first and last name div */}
         <div>
           <label>
@@ -120,7 +134,8 @@ function SignUpForm() {
             </span>
           </label>
         </div>
-        
+        {/* Submit button */}
+        <button type="submit">Create Account</button>
       </form>
     </div>
   );

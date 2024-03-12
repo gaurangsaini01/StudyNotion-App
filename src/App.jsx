@@ -13,8 +13,8 @@ function App() {
       <Navbar loginStatus={loginStatus} setLoginStatus={setLoginStatus}></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/signup" element={<Signup/>}></Route>
+        <Route path="/login" element={<Login setLoginStatus={setLoginStatus}/>}></Route>
+        <Route path="/signup" element={<Signup setLoginStatus={setLoginStatus}/>}></Route>
         <Route path="/dashboard" element={<Dashboard/>}></Route>
 
       </Routes>
