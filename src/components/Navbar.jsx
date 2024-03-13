@@ -11,14 +11,14 @@ function Navbar({loginStatus,setLoginStatus}) {
       </Link>
       <nav>
         <ul className="flex  gap-6">
-          <li>
+          <li className="hover:text-blue-100 transiontion-all duration-300 ease-in-out">
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/">About</Link>
+          <li className="hover:text-blue-100 transiontion-all duration-300 ease-in-out">
+            <Link to="/about">About</Link>
           </li>
-          <li>
-            <Link to="/">Contact</Link>
+          <li className="hover:text-blue-100 transiontion-all duration-300 ease-in-out">
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </nav>

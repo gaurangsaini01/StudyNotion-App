@@ -12,7 +12,9 @@ function SignUpForm({setLoginStatus}) {
     email: "",
     confirmPassword: "",
   });
-  const [showPass, setShowPass] = useState(true);
+  const [showPass, setShowPass] = useState(false);
+  const [showPass2,setShowPass2] = useState(false);
+  const[accountType,setAccountType] = useState('student')
   const navigate = useNavigate();
   function changeHandler(event) {
     setFormData((prev) => {
@@ -21,30 +23,37 @@ function SignUpForm({setLoginStatus}) {
   }
   function submitHandler(e){
     e.preventDefault();
-    if(formData.password!==formData.confirmPassword){
+    if(formData.password !== formData.confirmPassword){
         toast.error("Passwords Don't Match");
     }
     else{
         setLoginStatus(true);
         toast.success('Sign-up successfull , Welcome to dashboard')
         navigate('/dashboard');
+        console.log(formData)
     }
   }
+
   return (
     <div>
-      <div>
-        <button>Student</button>
-        <button>Instructor</button>
+      <div className="p-2 flex gap-1 my-6 rounded-full border bg-richblack-800 max-w-max ">
+        <button className={`${accountType==="student"?"bg-richblack-900 text-richblack-5":"bg-transparent text-richblack-200"} py-2 px-5 rounded-full transition-all duration-200`} onClick={()=>{
+          setAccountType('student');
+        }}>Student</button>
+        <button className={`${accountType==="instructor"?"bg-richblack-900 text-richblack-5":"bg-transparent text-richblack-200"} py-2 px-5 rounded-full transition-all duration-200`} onClick={()=>{
+          setAccountType('instructor')
+        }}>Instructor</button>
       </div>
 
-      <form onSubmit={submitHandler}>
-        {/* first and last name div */}
-        <div>
-          <label>
-            <p>
-              First Name <sup>*</sup>
+      <form onSubmit={submitHandler} className="flex flex-col gap-5 mt-5">
+        {/* first and last name div */} 
+        <div className="flex gap-5">
+          <label className="w-full">
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
+              First Name <sup className="text-pink-200">*</sup>
             </p>
             <input
+              className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type="text"
               name="firstName"
@@ -53,11 +62,12 @@ function SignUpForm({setLoginStatus}) {
               value={formData.firstName}
             />
           </label>
-          <label>
-            <p>
-              Last Name <sup>*</sup>
+          <label className="w-full">
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
+              Last Name <sup className="text-pink-200">*</sup>
             </p>
             <input
+            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type="text"
               name="lastName"
@@ -70,10 +80,11 @@ function SignUpForm({setLoginStatus}) {
         {/* email div */}
         <div>
           <label>
-            <p>
-              Email <sup>*</sup>
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
+              Email <sup className="text-pink-200">*</sup>
             </p>
             <input
+            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type="email"
               name="email"
@@ -84,12 +95,13 @@ function SignUpForm({setLoginStatus}) {
           </label>
         </div>
         {/* create and confirm password div */}
-        <div>
-          <label>
-            <p>
-              Create Password <sup>*</sup>
+        <div className="flex gap-5">
+          <label className=" w-full relative">
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
+              Create Password <sup className="text-pink-200">*</sup>
             </p>
             <input
+            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type={showPass ? "text" : "password"}
               name="password"
@@ -97,7 +109,7 @@ function SignUpForm({setLoginStatus}) {
               placeholder="Create Password"
               value={formData.password}
             />
-            <span
+            <span className='absolute right-3 top-10 cursor-pointer'
               onClick={() => {
                 setShowPass((prev) => !prev);
               }}
@@ -109,24 +121,25 @@ function SignUpForm({setLoginStatus}) {
               )}
             </span>
           </label>
-          <label>
-            <p>
-              Confirm Password <sup>*</sup>
+          <label className="relative w-full"> 
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem] ">
+              Confirm Password <sup className="text-pink-200">*</sup>
             </p>
             <input
+            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px] "
               required
-              type={showPass ? "text" : "password"}
+              type={showPass2 ? "text" : "password"}
               name="confirmPassword"
               onChange={changeHandler}
               placeholder="Confirm Password"
               value={formData.confirmPassword}
             />
-            <span
+            <span className= "absolute cursor-pointer right-3 bottom-4"
               onClick={() => {
-                setShowPass((prev) => !prev);
+                setShowPass2((prev) => !prev);
               }}
             >
-              {showPass ? (
+              {showPass2 ? (
                 <AiOutlineEye></AiOutlineEye>
               ) : (
                 <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
@@ -135,7 +148,7 @@ function SignUpForm({setLoginStatus}) {
           </label>
         </div>
         {/* Submit button */}
-        <button type="submit">Create Account</button>
+        <button type="submit" className="bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-3 py-2 mt-4 hover:bg-yellow-500 hover:text-richblack-700 w-full">Create Account</button>
       </form>
     </div>
   );
