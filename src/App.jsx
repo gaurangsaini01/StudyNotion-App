@@ -9,7 +9,7 @@ import { useState } from "react";
 function App() {
   const[loginStatus,setLoginStatus] = useState(false);
   return (
-    <div>
+    <div className=" w-screen h-screen bg-richblack-900 flex flex-col">
       <Navbar loginStatus={loginStatus} setLoginStatus={setLoginStatus}></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>

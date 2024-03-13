@@ -5,12 +5,12 @@ import toast from "react-hot-toast";
 
 function Navbar({loginStatus,setLoginStatus}) {
   return (
-    <div className="flex bg-black justify-evenly">
+    <div className="flex text-white justify-between item-center w-11/12 max-w-[1160px] py-4 mx-auto">
       <Link to="/">
         <img src={Logo} alt="logo" width="160px" height="32px" loading="lazy" />
       </Link>
       <nav>
-        <ul className="flex text-white gap-6">
+        <ul className="flex  gap-6">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -22,20 +22,20 @@ function Navbar({loginStatus,setLoginStatus}) {
           </li>
         </ul>
       </nav>
-      <div className="text-white gap-4 flex">
+      <div className=" gap-4 flex items-center ">
         { !loginStatus &&
           <Link to="/login">
-            <button>Login</button>
+            <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border-richblack-800">Login</button>
           </Link>
         }
         {   !loginStatus &&
           <Link to="/signup">
-            <button>Signup</button>
+            <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border-richblack-800">Signup</button>
           </Link>
         }
         {   loginStatus &&
           <Link to="/login">
-            <button onClick={()=>{
+            <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border-richblack-800" onClick={()=>{
                 setLoginStatus(false);
                 toast.success('Logged Out');
             }}>Logout</button>
@@ -43,7 +43,7 @@ function Navbar({loginStatus,setLoginStatus}) {
         }
         {   loginStatus &&
           <Link to="/dashboard">
-            <button>Dashboard</button>
+            <button className="bg-richblack-800 text-richblack-100 py-[8px] px-[12px] rounded-[8px] border-richblack-800">Dashboard</button>
           </Link>
         }
       </div>
