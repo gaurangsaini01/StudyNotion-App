@@ -16,11 +16,11 @@ function Template({ title, desc1, desc2, image, formType, setLoginStatus }) {
           <br />
           <span className="text-blue-100 italic">{desc2}</span>
         </p>
-        {formType === "signup" ? (
+        {formType === "signup" ? 
           <SignUpForm setLoginStatus={setLoginStatus}></SignUpForm>
-        ) : (
+         : 
           <LoginForm setLoginStatus={setLoginStatus}></LoginForm>
-        )}
+        }
         <div className="flex w-full items-center my-4 gap-x-2">
           <div className="w-full h-[1px] bg-richblack-700"></div>
           <p className="text-richblack-700 font-medium leading-[1.375rem] ">
@@ -38,8 +38,8 @@ function Template({ title, desc1, desc2, image, formType, setLoginStatus }) {
         <img
           className="absolute -top-4 right-4"
           src={image}
-          width={558}
-          height={504}
+          width={450}
+          height={350}
           loading="lazy"
         />
       </div>

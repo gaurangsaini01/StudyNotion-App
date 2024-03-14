@@ -3,8 +3,7 @@ import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-
-function SignUpForm({setLoginStatus}) {
+function SignUpForm({ setLoginStatus }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,40 +12,59 @@ function SignUpForm({setLoginStatus}) {
     confirmPassword: "",
   });
   const [showPass, setShowPass] = useState(false);
-  const [showPass2,setShowPass2] = useState(false);
-  const[accountType,setAccountType] = useState('student')
+  const [showPass2, setShowPass2] = useState(false);
+  const [accountType, setAccountType] = useState("student");
+
   const navigate = useNavigate();
   function changeHandler(event) {
     setFormData((prev) => {
       return { ...prev, [event.target.name]: event.target.value };
     });
   }
-  function submitHandler(e){
+  function submitHandler(e) {
     e.preventDefault();
-    if(formData.password !== formData.confirmPassword){
-        toast.error("Passwords Don't Match");
-    }
-    else{
-        setLoginStatus(true);
-        toast.success('Sign-up successfull , Welcome to dashboard')
-        navigate('/dashboard');
-        console.log(formData)
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords Don't Match");
+    } else {
+      setLoginStatus(true);
+      toast.success("Sign-up successfull , Welcome to dashboard");
+      navigate("/dashboard");
+      let completeData = {...formData,accountType}
+      console.log(completeData)
     }
   }
 
   return (
     <div>
-      <div className="p-2 flex gap-1 my-6 rounded-full border bg-richblack-800 max-w-max ">
-        <button className={`${accountType==="student"?"bg-richblack-900 text-richblack-5":"bg-transparent text-richblack-200"} py-2 px-5 rounded-full transition-all duration-200`} onClick={()=>{
-          setAccountType('student');
-        }}>Student</button>
-        <button className={`${accountType==="instructor"?"bg-richblack-900 text-richblack-5":"bg-transparent text-richblack-200"} py-2 px-5 rounded-full transition-all duration-200`} onClick={()=>{
-          setAccountType('instructor')
-        }}>Instructor</button>
+      <div className="p-1 flex gap-1 my-6 rounded-full  bg-richblack-800 max-w-max ">
+        <button
+          className={`${
+            accountType === "student"
+              ? "bg-richblack-900 text-richblack-5"
+              : "bg-transparent text-richblack-200"
+          } py-2 px-5 rounded-full transition-all duration-200 ease-in`}
+          onClick={() => {
+            setAccountType("student");
+          }}
+        >
+          Student
+        </button>
+        <button
+          className={`${
+            accountType === "instructor"
+              ? "bg-richblack-900 text-richblack-5"
+              : "bg-transparent text-richblack-200"
+          } py-2 px-5 rounded-full transition-all duration-200 ease-out`}
+          onClick={() => {
+            setAccountType("instructor");
+          }}
+        >
+          Instructor
+        </button>
       </div>
 
       <form onSubmit={submitHandler} className="flex flex-col gap-5 mt-5">
-        {/* first and last name div */} 
+        {/* first and last name div */}
         <div className="flex gap-5">
           <label className="w-full">
             <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
@@ -67,7 +85,7 @@ function SignUpForm({setLoginStatus}) {
               Last Name <sup className="text-pink-200">*</sup>
             </p>
             <input
-            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
+              className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type="text"
               name="lastName"
@@ -84,7 +102,7 @@ function SignUpForm({setLoginStatus}) {
               Email <sup className="text-pink-200">*</sup>
             </p>
             <input
-            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
+              className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type="email"
               name="email"
@@ -101,7 +119,7 @@ function SignUpForm({setLoginStatus}) {
               Create Password <sup className="text-pink-200">*</sup>
             </p>
             <input
-            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
+              className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px]"
               required
               type={showPass ? "text" : "password"}
               name="password"
@@ -109,7 +127,8 @@ function SignUpForm({setLoginStatus}) {
               placeholder="Create Password"
               value={formData.password}
             />
-            <span className='absolute right-3 top-10 cursor-pointer'
+            <span
+              className="absolute right-3 top-10 cursor-pointer"
               onClick={() => {
                 setShowPass((prev) => !prev);
               }}
@@ -121,12 +140,12 @@ function SignUpForm({setLoginStatus}) {
               )}
             </span>
           </label>
-          <label className="relative w-full"> 
+          <label className="relative w-full">
             <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem] ">
               Confirm Password <sup className="text-pink-200">*</sup>
             </p>
             <input
-            className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px] "
+              className="bg-richblack-800 rounded-md text-richblack-5 w-full p-[10px] "
               required
               type={showPass2 ? "text" : "password"}
               name="confirmPassword"
@@ -134,7 +153,8 @@ function SignUpForm({setLoginStatus}) {
               placeholder="Confirm Password"
               value={formData.confirmPassword}
             />
-            <span className= "absolute cursor-pointer right-3 bottom-4"
+            <span
+              className="absolute cursor-pointer right-3 bottom-4"
               onClick={() => {
                 setShowPass2((prev) => !prev);
               }}
@@ -148,7 +168,12 @@ function SignUpForm({setLoginStatus}) {
           </label>
         </div>
         {/* Submit button */}
-        <button type="submit" className="bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-3 py-2 mt-4 hover:bg-yellow-500 hover:text-richblack-700 w-full">Create Account</button>
+        <button
+          type="submit"
+          className="bg-yellow-50 rounded-[8px] font-medium text-richblack-900 px-3 py-2 mt-4 hover:bg-yellow-500 hover:text-richblack-700 w-full"
+        >
+          Create Account
+        </button>
       </form>
     </div>
   );
